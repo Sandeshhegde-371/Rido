@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { logout } from '@/app/actions/auth'
 import { Button } from '@/components/ui/button'
-import { LayoutDashboard, Users, BookOpen, CreditCard, LogOut, Video, Bell, Settings as SettingsIcon } from 'lucide-react'
+import { LayoutDashboard, Users, BookOpen, CreditCard, LogOut, Video, Bell, Settings as SettingsIcon, Package } from 'lucide-react'
 
 export default async function AdminLayout({
   children,
@@ -44,6 +44,10 @@ export default async function AdminLayout({
           <Link href="/admin/resources" className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-foreground hover:text-primary transition-colors">
             <BookOpen size={20} />
             <span className="font-medium">Resources</span>
+          </Link>
+          <Link href="/admin/bundles" className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-foreground hover:text-primary transition-colors">
+            <Package size={20} />
+            <span className="font-medium">Bundles</span>
           </Link>
           <Link href="/admin/users" className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-foreground hover:text-primary transition-colors">
             <Users size={20} />
