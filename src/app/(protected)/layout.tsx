@@ -80,7 +80,7 @@ export default async function ProtectedLayout({
         </nav>
         <div className="p-4 border-t border-border/50">
           <form action={logout}>
-            <Button variant="ghost" className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10">
+            <Button type="submit" variant="ghost" className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10">
               <LogOut className="mr-2 h-4 w-4" />
               Log out
             </Button>
@@ -110,7 +110,7 @@ export default async function ProtectedLayout({
                   </nav>
                   <div className="p-4 border-t border-border/50">
                     <form action={logout}>
-                      <Button variant="ghost" className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10">
+                      <Button type="submit" variant="ghost" className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10">
                         <LogOut className="mr-2 h-4 w-4" />
                         Log out
                       </Button>
