@@ -61,7 +61,7 @@ export async function signup(formData: FormData) {
 
   const supabase = await createClient()
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -75,6 +75,28 @@ export async function signup(formData: FormData) {
     redirect(`/signup?error=${encodeURIComponent(error.message)}`)
   }
 
+  // If email confirmations are turned off, Supabase will instantly log the user in and return a session
+  if (data.session) {
+    const newSessionId = crypto.randomUUID()
+    
+    await supabase
+      .from('profiles')
+      .update({ active_session_id: newSessionId, last_login: new Date().toISOString() })
+      .eq('id', data.user!.id)
+
+    const cookieStore = await cookies()
+    cookieStore.set('rido_session_id', newSessionId, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+    })
+
+    revalidatePath('/dashboard')
+    redirect('/dashboard')
+  }
+
+  // Otherwise, they need to verify their email
   redirect('/login?message=Check your email to confirm your account')
 }
 
